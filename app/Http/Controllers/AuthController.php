@@ -9,14 +9,18 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
+        if (Auth::check()) {
+            return redirect()->route('barang.index');
+        }
+
         return view('auth.login');
     }
 
     public function login(Request $request)
     {
         $request->validate([
-            'email'    => 'required|email',
-            'password' => 'required',
+            'email'    => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
         $credentials = [
@@ -33,7 +37,7 @@ class AuthController extends Controller
 
         return back()
             ->withErrors([
-                'email' => 'Email atau Password salah.',
+                'email' => 'Email atau password salah.',
             ])
             ->withInput();
     }
@@ -46,6 +50,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }
