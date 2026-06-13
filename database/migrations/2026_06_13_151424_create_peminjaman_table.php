@@ -6,20 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('peminjaman', function (Blueprint $table) {
+
             $table->id();
+
+            $table->string('kode_pinjam', 30)->unique();
+
+            $table->foreignId('peminjam_id')
+                ->constrained('peminjam')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
+
+            $table->date('tanggal_pinjam');
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('peminjaman');
