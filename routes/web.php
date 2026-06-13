@@ -3,16 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PeminjamController;
 
 Route::get('/', function () {
     return redirect('/login');
 });
-
-/*
-|--------------------------------------------------------------------------
-| Guest Routes
-|--------------------------------------------------------------------------
-*/
 
 Route::middleware('guest')->group(function () {
 
@@ -23,12 +18,6 @@ Route::middleware('guest')->group(function () {
         ->name('login.process');
 });
 
-/*
-|--------------------------------------------------------------------------
-| Authenticated Routes
-|--------------------------------------------------------------------------
-*/
-
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', function () {
@@ -36,6 +25,8 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 
     Route::resource('barang', BarangController::class);
+
+    Route::resource('peminjam', PeminjamController::class);
 
     Route::post('/logout', [AuthController::class, 'logout'])
         ->name('logout');
