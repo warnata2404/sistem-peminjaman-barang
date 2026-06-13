@@ -13,7 +13,10 @@ class PeminjamanController extends Controller
 {
     public function index()
     {
-        $peminjaman = Peminjaman::with('peminjam')
+        $peminjaman = Peminjaman::with([
+            'peminjam',
+            'detailPeminjaman.barang'
+        ])
             ->latest()
             ->get();
 

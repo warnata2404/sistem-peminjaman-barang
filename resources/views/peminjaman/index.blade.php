@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="d-flex justify-content-between mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
 
         <h3>Data Peminjaman</h3>
 
@@ -16,16 +16,18 @@
 
     </div>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
 
-        <thead>
+        <thead class="table-dark">
 
             <tr>
 
-                <th>No</th>
+                <th width="60">No</th>
                 <th>Kode Pinjam</th>
                 <th>Tanggal</th>
                 <th>Peminjam</th>
+                <th>Barang</th>
+                <th width="100">Qty</th>
 
             </tr>
 
@@ -34,6 +36,10 @@
         <tbody>
 
             @forelse($peminjaman as $item)
+                @php
+                    $detail = $item->detailPeminjaman->first();
+                @endphp
+
                 <tr>
 
                     <td>{{ $loop->iteration }}</td>
@@ -44,15 +50,23 @@
 
                     <td>{{ $item->peminjam->nama_peminjam }}</td>
 
+                    <td>
+                        {{ $detail?->barang?->nama_barang ?? '-' }}
+                    </td>
+
+                    <td>
+                        {{ $detail?->qty ?? '-' }}
+                    </td>
+
                 </tr>
 
             @empty
 
                 <tr>
 
-                    <td colspan="4" class="text-center">
+                    <td colspan="6" class="text-center">
 
-                        Belum ada transaksi.
+                        Belum ada transaksi peminjaman.
 
                     </td>
 
