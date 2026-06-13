@@ -45,9 +45,8 @@ Route::middleware('auth')->group(function () {
     |--------------------------------------------------------------------------
     */
 
-    Route::get('/dashboard', function () {
-        return redirect()->route('barang.index');
-    })->name('dashboard');
+    Route::view('/dashboard', 'dashboard')
+        ->name('dashboard');
 
     /*
     |--------------------------------------------------------------------------

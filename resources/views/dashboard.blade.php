@@ -1,35 +1,56 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>Dashboard</title>
+@section('title', 'Dashboard')
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@section('content')
 
-<body>
+    <h3>Dashboard</h3>
 
-    <div class="container mt-5">
+    <div class="row">
 
-        <div class="card">
+        <div class="col-md-4">
 
-            <div class="card-body">
+            <div class="card border-primary">
 
-                <h3>Dashboard</h3>
+                <div class="card-body">
 
-                <p>
-                    Login berhasil.
-                </p>
+                    <h5>Total Barang</h5>
 
-                <form action="{{ route('logout') }}" method="POST">
+                    <h2>{{ \App\Models\Barang::count() }}</h2>
 
-                    @csrf
+                </div>
 
-                    <button type="submit" class="btn btn-danger">
-                        Logout
-                    </button>
+            </div>
 
-                </form>
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card border-success">
+
+                <div class="card-body">
+
+                    <h5>Total Peminjam</h5>
+
+                    <h2>{{ \App\Models\Peminjam::count() }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card border-warning">
+
+                <div class="card-body">
+
+                    <h5>Total Transaksi</h5>
+
+                    <h2>{{ \App\Models\Peminjaman::count() }}</h2>
+
+                </div>
 
             </div>
 
@@ -37,6 +58,4 @@
 
     </div>
 
-</body>
-
-</html>
+@endsection
