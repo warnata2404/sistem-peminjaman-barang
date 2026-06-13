@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
-
+    <meta charset="UTF-8">
     <title>Sistem Peminjaman Barang</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -15,7 +14,7 @@
 
         <div class="container">
 
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{ route('barang.index') }}">
                 Sistem Peminjaman Barang
             </a>
 
@@ -23,7 +22,7 @@
 
                 @csrf
 
-                <button class="btn btn-danger btn-sm">
+                <button type="submit" class="btn btn-danger btn-sm">
                     Logout
                 </button>
 

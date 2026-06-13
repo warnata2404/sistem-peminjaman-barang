@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3>Data Barang</h3>
+    <div class="d-flex justify-content-between mb-3">
 
-    <a href="{{ route('barang.create') }}" class="btn btn-primary mb-3">
-        Tambah Barang
-    </a>
+        <h3>Data Barang</h3>
+
+        <a href="{{ route('barang.create') }}" class="btn btn-primary">
+            Tambah Barang
+        </a>
+
+    </div>
 
     @if (session('success'))
         <div class="alert alert-success">
@@ -15,25 +19,26 @@
         </div>
     @endif
 
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
 
         <thead>
 
             <tr>
-
-                <th>Kode</th>
+                <th>No</th>
+                <th>Kode Barang</th>
                 <th>Nama Barang</th>
                 <th>Stok</th>
                 <th width="180">Aksi</th>
-
             </tr>
 
         </thead>
 
         <tbody>
 
-            @foreach ($barang as $item)
+            @forelse($barang as $item)
                 <tr>
+
+                    <td>{{ $loop->iteration }}</td>
 
                     <td>{{ $item->kode_barang }}</td>
 
@@ -54,7 +59,7 @@
                             @csrf
                             @method('DELETE')
 
-                            <button onclick="return confirm('Hapus data?')" class="btn btn-danger btn-sm">
+                            <button onclick="return confirm('Yakin hapus data ini?')" class="btn btn-danger btn-sm">
 
                                 Hapus
 
@@ -65,7 +70,19 @@
                     </td>
 
                 </tr>
-            @endforeach
+
+            @empty
+
+                <tr>
+
+                    <td colspan="5" class="text-center">
+
+                        Tidak ada data
+
+                    </td>
+
+                </tr>
+            @endforelse
 
         </tbody>
 

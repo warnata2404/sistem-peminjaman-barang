@@ -27,11 +27,11 @@ class BarangController extends Controller
             'stok'        => 'required|integer|min:0',
         ]);
 
-        Barang::create([
-            'kode_barang' => $request->kode_barang,
-            'nama_barang' => $request->nama_barang,
-            'stok'        => $request->stok,
-        ]);
+        Barang::create($request->only([
+            'kode_barang',
+            'nama_barang',
+            'stok'
+        ]));
 
         return redirect()
             ->route('barang.index')
@@ -55,11 +55,11 @@ class BarangController extends Controller
             'stok'        => 'required|integer|min:0',
         ]);
 
-        $barang->update([
-            'kode_barang' => $request->kode_barang,
-            'nama_barang' => $request->nama_barang,
-            'stok'        => $request->stok,
-        ]);
+        $barang->update($request->only([
+            'kode_barang',
+            'nama_barang',
+            'stok'
+        ]));
 
         return redirect()
             ->route('barang.index')
